@@ -22,4 +22,9 @@ THEN the task is removed from the task board and will not be added back after re
 WHEN I refresh the page
 THEN the saved tasks persist 
 
+
+
 Was given a blank task board with three columns: to do, in progress, and done. The 'add task' button doesn't work.
+Added datepicker from jquery ui.
+Added modal from bootstrap.
+Modified modal to match mock-up.

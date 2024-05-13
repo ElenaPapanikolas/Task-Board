@@ -2,6 +2,20 @@
 let taskList = JSON.parse(localStorage.getItem("tasks"));
 let nextId = JSON.parse(localStorage.getItem("nextId"));
 
+//
+if (!taskList) {
+    taskList = [];
+}
+ function storeTask(newTask) {
+    taskList.push(newTask);
+    localStorage.setItem("tasks", JSON.stringify(taskList));
+ }
+
+ function getTask() {
+    return taskList;
+ }
+ 
+
 // Todo: create a function to generate a unique task id
 function generateTaskId() {
 
@@ -41,7 +55,10 @@ $(document).ready(function () {
 
 // datepicker
     $(function() {
-        $( "#datepicker" ).datepicker();
+        $( "#task-due-date" ).datepicker({
+            changeMonth: true,
+            changeYear: true
+          });
       });
 
 

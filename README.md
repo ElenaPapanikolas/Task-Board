@@ -28,3 +28,11 @@ Was given a blank task board with three columns: to do, in progress, and done. T
 Added datepicker from jquery ui.
 Added modal from bootstrap.
 Modified modal to match mock-up.
+Set up local storage functions to get and save information.
+Added event listener to the Add Task button.
+Created function to handle adding a new task.
+For that function I had to declare const variables, and create a newTask object? ....
+Cleared task input form after each use.
+Created function to create a task card. The function creates HTML and styles it.
+With an if and else if statement, it adjusts the color of the cards by due date.
+Then needed to append all elements to the taskCard and return the completed card.

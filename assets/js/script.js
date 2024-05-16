@@ -26,7 +26,42 @@ function generateTaskId() {
 
 // Todo: create a function to create a task card
 function createTaskCard(task) {
+    const taskList = readFromStorage();
+    const nextId = readIdFromStorage();
 
+    const taskCard = $('<div>')
+        .addClass('card draggable my-3')
+        .data('data-task-id', newTask.id);
+    const taskHeader = $('<h5>')
+        .addClass('card-header').text(newTask.title);
+    const taskBody = $('<div>')
+        .addClass('card-body');
+    const taskDescription = $('<p>')
+        .addClass('card-text').text(newTask.description);
+    const taskDueDate =$('<p>')
+        .addClass('card-text').text(newTask.dueDate);
+    const taskDelete = $('<button>')
+        .addClass('btn btn-danger delete')
+        .text('Delete')
+        .data('data-task-id', newTask.id);
+    taskDelete.on('click', handleDeleteTask);
+    
+    if (newTask.dueDate && newTask.status !== 'done') {
+        const dueDate = dayjs(newTask.dueDate, 'MM DD, YYYY');
+        const currentDate = dayjs();
+        //adjusts color of card by due date
+        if (currentDate.isSame(dueDate, 'day')) {
+            taskCard.addClass('bg-warning text-white');
+        } else if (currentDate.isAfter(dueDate)) {
+            taskCard.addClass('bg-danger text-white');
+            taskDelete.addClass('border-light');
+        }
+    }
+
+    //appends all elements to taskCard and returns completed card
+    taskCard.append(taskHeader, taskBody);
+    taskBody.append(taskDescription, taskDueDate, taskDelete);
+    return taskCard;
 }
 
 // Todo: create a function to render the task list and make cards draggable
@@ -52,7 +87,6 @@ function handleAddTask(event) {
     }
 
     
-
     taskList.push(newTask);
     saveToStorage(taskList);
     renderTaskList(newTask);

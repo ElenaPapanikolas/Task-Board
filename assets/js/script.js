@@ -66,6 +66,37 @@ function createTaskCard(task) {
 
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
+    //empty columns to avoid duplicates being rendered on handleAddTask
+    toDoColumn.empty();
+    inProgressColumn.empty();
+    doneColumn.empty();
+    const taskList = readFromStorage();
+
+
+    //Appends to proper column based on task status
+    for (let task of taskList) {
+        if (task.status === 'to-do') {
+            toDoColumn.append(createTaskCard(task));
+        } else if (task.status === 'in-progress') {
+            inProgressColumn.append(createTaskCard(task));
+        } else if (task.status === 'done') {
+            doneColumn.append(createTaskCard(task));
+        }
+    }
+
+    //Makes cards draggable
+    $('.draggable').draggable({
+        opacity: 0.7,
+        zIndex: 100,
+        helper: function (e) {
+          const original = $(e.target).hasClass('ui-draggable')
+            ? $(e.target)
+            : $(e.target).closest('.ui-draggable');
+          return original.clone().css({
+            width: original.outerWidth(),
+          });
+        },
+      });
 
 }
 
@@ -86,11 +117,13 @@ function handleAddTask(event) {
         status: 'to-do',
     }
 
-    
+    // pushes to taskList array
     taskList.push(newTask);
     saveToStorage(taskList);
     renderTaskList(newTask);
+
     console.log(taskList);  // take this out eventually
+
     //  clear task input form after each use
     taskTitle.val('');
     taskDueDate.val('');
@@ -110,6 +143,11 @@ function handleDrop(event, ui) {
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function () {
+    //reads local storage
+    const taskList = readFromStorage();
+    //renders task list
+    renderTaskList();
+    //event listener to add tasks
     $("#taskbtn").on("click", handleAddTask);
 
 

@@ -1,5 +1,11 @@
 
 
+
+
+const toDoColumn = $("#todo-cards");
+const inProgressColumn = $("#in-progress-cards");
+const doneColumn = $("#done-cards");
+
 // Retrieve tasks and nextId from localStorage
 let taskList = JSON.parse(localStorage.getItem("tasks"));
 let nextId = JSON.parse(localStorage.getItem("nextId"));
@@ -25,9 +31,9 @@ function generateTaskId() {
 }
 
 // Todo: create a function to create a task card
-function createTaskCard(task) {
+function createTaskCard(newTask) {
     const taskList = readFromStorage();
-    const nextId = readIdFromStorage();
+    
 
     const taskCard = $('<div>')
         .addClass('card draggable my-3')
@@ -122,7 +128,6 @@ function handleAddTask(event) {
     saveToStorage(taskList);
     renderTaskList(newTask);
 
-    console.log(taskList);  // take this out eventually
 
     //  clear task input form after each use
     taskTitle.val('');
@@ -133,6 +138,18 @@ function handleAddTask(event) {
 
 // Todo: create a function to handle deleting a task
 function handleDeleteTask(event){
+    const taskList = readFromStorage();
+    const deleteButton = $(event.target);
+
+    const targetId = deleteButton.data('data-task-id');
+    const targetIndex = taskList.findIndex(task => task.id === targetId);
+
+    if (targetIndex > -1) {
+        taskList.splice(targetIndex, 1);
+    }
+
+    deleteButton.parent().parent('div').remove();
+    saveToStorage(taskList);
 
 }
 
@@ -143,14 +160,17 @@ function handleDrop(event, ui) {
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function () {
-    //reads local storage
+    // reads local storage
     const taskList = readFromStorage();
-    //renders task list
+
+    // renders task list
     renderTaskList();
-    //event listener to add tasks
+
+    // event listener to add tasks
     $("#taskbtn").on("click", handleAddTask);
 
-
+    // event listener to delete tasks
+    $(".swim-lanes").on("click", ".btn-danger", handleDeleteTask);
 
 
 // datepicker

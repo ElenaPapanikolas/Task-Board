@@ -22,10 +22,14 @@ THEN the task is removed from the task board and will not be added back after re
 WHEN I refresh the page
 THEN the saved tasks persist 
 
+## Credits
+
+Used third party libraries Bootstrap, jQuery, and jQuery UI, and Day.js.
 
 
+##
 Was given a blank task board with three columns: to do, in progress, and done. The 'add task' button doesn't work.
-Added datepicker from jquery ui.
+Added datepicker from jQuery ui.
 Added modal from bootstrap.
 Modified modal to match mock-up.
 Set up local storage functions to get and save information.
@@ -36,3 +40,4 @@ Cleared task input form after each use.
 Created function to create a task card. The function creates HTML and styles it.
 With an if and else if statement, it adjusts the color of the cards by due date.
 Then needed to append all elements to the taskCard and return the completed card.
+

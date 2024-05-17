@@ -40,4 +40,7 @@ Cleared task input form after each use.
 Created function to create a task card. The function creates HTML and styles it.
 With an if and else if statement, it adjusts the color of the cards by due date.
 Then needed to append all elements to the taskCard and return the completed card.
+Created function to render task list and make cards draggable.
+Created functions to delete tasks.
+
 

@@ -155,6 +155,23 @@ function handleDeleteTask(event){
 
 // Todo: create a function to handle dropping a task into a new status lane
 function handleDrop(event, ui) {
+    const taskList = readFromStorage();
+
+
+    const targetId = ui.draggable.data('data-task-id');
+
+    for (i = 0; i < taskList.length; i++) {
+        const task = taskList[i];
+        const updateStatus = event.target.id;
+
+        if (targetId === task.id) {
+            task.status = updateStatus;
+        }
+    }
+
+
+    saveToStorage(taskList);
+    renderTaskList();
 
 }
 
@@ -181,6 +198,10 @@ $(document).ready(function () {
           });
       });
 
-
+// makes lanes open to draggable cards
+    $( ".droppable" ).droppable({
+        accept: '.draggable',
+         drop: handleDrop, 
+          });
 
 });

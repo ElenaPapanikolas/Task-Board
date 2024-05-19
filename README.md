@@ -1,46 +1,29 @@
 # Task-Board
 
 
+## Description
 
-AS A project team member with multiple tasks to organize
-I WANT a task board 
-SO THAT I can add individual project tasks, manage their state of progress and track overall project progress accordingly
+For this challenge I was given starter code for a task board application, for task management. Originally, the code just had three empty columns; one for "To Do", "In Progress", and "Done" tasks. It also contained an "Add Task" button that did nothing. The application uses different colors to indicate priority of the tasks by due-date. White is used for tasks due in the future or already done, yellow is used for tasks due the current day, and red is used for tasks that are past due. These differently colored cards are created and rendered to the screen when the user enters their tasks into the modal pop up. The user can drag the cards to the appropriate column to keep track of their tasks, and also delete the cards completely when they are no longer needed.
 
-GIVEN a task board to manage a project
-WHEN I open the task board
-THEN the list of project tasks is displayed in columns representing the task progress state (Not Yet Started, In Progress, Completed)
-WHEN I view the task board for the project
-THEN each task is color coded to indicate whether it is nearing the deadline (yellow) or is overdue (red)
-WHEN I click on the button to define a new task
-THEN I can enter the title, description and deadline date for the new task into a modal dialog
-WHEN I click the save button for that task
-THEN the properties for that task are saved in localStorage
-WHEN I drag a task to a different progress column
-THEN the task's progress state is updated accordingly and will stay in the new column after refreshing
-WHEN I click the delete button for a task
-THEN the task is removed from the task board and will not be added back after refreshing
-WHEN I refresh the page
-THEN the saved tasks persist 
+This challenge proved the most difficult yet. I started with adding a modal from Bootstrap and then adding a datepicker from jQuery Ui, to that modal. I then modified the modal to match the mockup. Then I started with the handleAddTask function, which uses the information from the user, to create a task object and then push the tasks to an array. The array is saved to local storage and used frequently throughout the rest of the code. Then I needed to get the tasks to show up on the screen. I used the createTaskCard function to create all the HTML elements and assign them to Bootstrap classes to style. I had to use a conditional statement to determine the color of the card based on the user entered due date. Then the renderTaskList function was used to append the card to the "To Do" column, to start with. /////////
+
+
+## Installation
+
+N/A
+
+
+## Usage
+
+The user is presented with a blank task board application. There are three columns, one for "To Do" tasks, "In Progress" tasks, and "Done" tasks. By clicking the "Add Task" button, a modal (made using Bootstrap) pops up on the screen and the user is prompted to enter the task title, due date, and description. The datepicker from jQuery UI, makes selecting a date easy. By clicking the "Add Task" button again, the task is confirmed and it appears on the screen in the "To Do" column. From here, the user can add as many tasks as they want. A task due in the future will create a white card, a task due today will create a yellow card, and a past-due task will create a red card. The cards can be dragged and dropped into any column the user wants. All cards put in the "Done" column will turn white, regardless of the color they started in. When the user no longer needs a task card on the board, it can be deleted by clicking the red "Delete" button, and it will be removed. Refreshing the page will not erase or change the position of any of the cards. The user can add and delete task cards as much as they like. 
+
+
 
 ## Credits
 
-Used third party libraries Bootstrap, jQuery, and jQuery UI, and Day.js.
+Used third party libraries Bootstrap, jQuery, jQuery UI, and Day.js.
 
 
-##
-Was given a blank task board with three columns: to do, in progress, and done. The 'add task' button doesn't work.
-Added datepicker from jQuery ui.
-Added modal from bootstrap.
-Modified modal to match mock-up.
-Set up local storage functions to get and save information.
-Added event listener to the Add Task button.
-Created function to handle adding a new task.
-For that function I had to declare const variables, and create a newTask object? ....
-Cleared task input form after each use.
-Created function to create a task card. The function creates HTML and styles it.
-With an if and else if statement, it adjusts the color of the cards by due date.
-Then needed to append all elements to the taskCard and return the completed card.
-Created function to render task list and make cards draggable.
-Created functions to delete tasks.
+## License
 
-
+N/A

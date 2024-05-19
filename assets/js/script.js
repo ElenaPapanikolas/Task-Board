@@ -1,7 +1,4 @@
-
-
-
-
+// declaring variables
 const toDoColumn = $("#todo-cards");
 const inProgressColumn = $("#in-progress-cards");
 const doneColumn = $("#done-cards");
@@ -34,7 +31,7 @@ function generateTaskId() {
 function createTaskCard(newTask) {
     const taskList = readFromStorage();
     
-
+    // creates HTML
     const taskCard = $('<div>')
         .addClass('card draggable my-3')
         .data('data-task-id', newTask.id);
@@ -52,10 +49,11 @@ function createTaskCard(newTask) {
         .data('data-task-id', newTask.id);
     taskDelete.on('click', handleDeleteTask);
     
+    // conditional statement to color cards by due dates
     if (newTask.dueDate && newTask.status !== 'done') {
         const dueDate = dayjs(newTask.dueDate, 'MM DD, YYYY');
         const currentDate = dayjs();
-        //adjusts color of card by due date
+        // adjusts color of card by due date
         if (currentDate.isSame(dueDate, 'day')) {
             taskCard.addClass('bg-warning text-white');
         } else if (currentDate.isAfter(dueDate)) {
@@ -64,7 +62,7 @@ function createTaskCard(newTask) {
         }
     }
 
-    //appends all elements to taskCard and returns completed card
+    // appends all elements to taskCard and returns completed card
     taskCard.append(taskHeader, taskBody);
     taskBody.append(taskDescription, taskDueDate, taskDelete);
     return taskCard;
@@ -72,14 +70,15 @@ function createTaskCard(newTask) {
 
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
-    //empty columns to avoid duplicates being rendered on handleAddTask
+
+    // empty columns to avoid duplicates being rendered on handleAddTask
     toDoColumn.empty();
     inProgressColumn.empty();
     doneColumn.empty();
     const taskList = readFromStorage();
 
 
-    //Appends to proper column based on task status
+    // Appends to proper column based on task status
     for (let task of taskList) {
         if (task.status === 'to-do') {
             toDoColumn.append(createTaskCard(task));
@@ -90,7 +89,7 @@ function renderTaskList() {
         }
     }
 
-    //Makes cards draggable
+    // Makes cards draggable
     $('.draggable').draggable({
         opacity: 0.7,
         zIndex: 100,
@@ -125,11 +124,13 @@ function handleAddTask(event) {
 
     // pushes to taskList array
     taskList.push(newTask);
+    // saves to local storage
     saveToStorage(taskList);
+    // renders task list
     renderTaskList(newTask);
 
 
-    //  clear task input form after each use
+    //  clears task input form after each use
     taskTitle.val('');
     taskDueDate.val('');
     taskDescription.val('');
@@ -157,7 +158,6 @@ function handleDeleteTask(event){
 function handleDrop(event, ui) {
     const taskList = readFromStorage();
 
-
     const targetId = ui.draggable.data('data-task-id');
 
     for (i = 0; i < taskList.length; i++) {
@@ -169,8 +169,9 @@ function handleDrop(event, ui) {
         }
     }
 
-
+    // saves to local storage
     saveToStorage(taskList);
+    // renders task list
     renderTaskList();
 
 }
@@ -190,7 +191,7 @@ $(document).ready(function () {
     $(".swim-lanes").on("click", ".btn-danger", handleDeleteTask);
 
 
-// datepicker
+    // datepicker
     $(function() {
         $("#task-due-date").datepicker({
             changeMonth: true,
@@ -198,7 +199,7 @@ $(document).ready(function () {
           });
       });
 
-// makes lanes open to draggable cards
+    // makes lanes open to draggable cards
     $( ".droppable" ).droppable({
         accept: '.draggable',
          drop: handleDrop, 

@@ -18,7 +18,7 @@ N/A
 The user is presented with a blank task board application. There are three columns, one for "To Do" tasks, "In Progress" tasks, and "Done" tasks. By clicking the "Add Task" button, a modal (made using Bootstrap) pops up on the screen and the user is prompted to enter the task title, due date, and description. The datepicker from jQuery UI, makes selecting a date easy. By clicking the "Add Task" button again, the task is confirmed and it appears on the screen in the "To Do" column. From here, the user can add as many tasks as they want. A task due in the future will create a white card, a task due today will create a yellow card, and a past-due task will create a red card. The cards can be dragged and dropped into any column the user wants. All cards put in the "Done" column will turn white, regardless of the color they started in. When the user no longer needs a task card on the board, it can be deleted by clicking the red "Delete" button, and it will be removed. Refreshing the page will not erase or change the position of any of the cards. The user can add and delete task cards as much as they like. 
 
 
-[Click here]() to view deployed application.
+[Click here](https://elenapapanikolas.github.io/Task-Board/) to view deployed application.
 
 
 !["Task-board screenshot"](./assets/images/taskboardscreenshot.png)
